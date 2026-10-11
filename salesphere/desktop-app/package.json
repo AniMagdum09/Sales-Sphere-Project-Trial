@@ -1,0 +1,56 @@
+{
+  "name": "salessphere-desktop",
+  "productName": "SalesSphere",
+  "version": "2.0.0",
+  "private": true,
+  "description": "SalesSphere — offline retail analytics desktop dashboard (Electron + React + Vite)",
+  "main": "electron/main.js",
+  "author": "SalesSphere",
+  "license": "MIT",
+  "scripts": {
+    "dev": "concurrently -k -n Vite,Electron -c green,cyan \"npm:dev:vite\" \"wait-on tcp:127.0.0.1:5173 && npm:dev:electron\"",
+    "dev:vite": "vite",
+    "dev:electron": "cross-env VITE_DEV_SERVER_URL=http://127.0.0.1:5173 electron .",
+    "build": "vite build",
+    "preview": "vite preview",
+    "dist": "electron-builder --win portable",
+    "dist:installer": "electron-builder --win nsis"
+  },
+  "build": {
+    "appId": "com.salesphere.desktop",
+    "productName": "SalesSphere",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "dist/**/*",
+      "electron/**/*"
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "portable",
+          "arch": ["x64"]
+        }
+      ]
+    },
+    "portable": {
+      "artifactName": "SalesSphere-Portable.exe"
+    },
+    "compression": "maximum"
+  },
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "recharts": "^2.15.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.4",
+    "concurrently": "^9.1.0",
+    "cross-env": "^7.0.3",
+    "electron": "^33.2.0",
+    "electron-builder": "^26.15.3",
+    "vite": "^5.4.11",
+    "wait-on": "^8.0.1"
+  }
+}

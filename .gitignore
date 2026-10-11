@@ -1,0 +1,34 @@
+# ---- SalesSphere .gitignore ----
+
+# Dependencies (huge - reinstall with npm install / pip install)
+node_modules/
+analytics-api/.venv/
+**/__pycache__/
+*.pyc
+
+# Build outputs
+desktop-app/dist/
+desktop-app/release/
+sync-agent/target/
+*.jar
+*.exe
+
+# Local databases & credentials (never push)
+*.db
+*.sqlite
+application-local.yml
+.env
+
+# Logs & transient files
+*.log
+analytics-api/testfiles/
+analytics-api/uvicorn.log
+sync-agent/agent-run.log
+
+# OS / editor noise
+.DS_Store
+Thumbs.db
+.zcode*
+
+# tooling noise
+.github/modernize/

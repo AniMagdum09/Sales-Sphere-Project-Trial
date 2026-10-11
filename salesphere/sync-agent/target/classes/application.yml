@@ -1,0 +1,42 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: salesphere-sync-agent
+
+logging:
+  level:
+    com.salesphere: INFO
+    com.zaxxer.hikari: WARN
+
+salesphere:
+  # TARGET database (primary, SalesSphere-owned, writable). Flyway migrations run here.
+  target:
+    hikari:
+      jdbc-url: jdbc:mysql://127.0.0.1:3306/salessphere_local?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Kolkata&createDatabaseIfNotExist=true
+      username: root
+      password: root
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      maximum-pool-size: 5
+
+  # SOURCE database (read-only): the shop's existing SQL Server billing system.
+  # These values seed the source_config table on first boot; after that the DB row
+  # is authoritative and can be changed at runtime via PUT /api/config/source.
+  source:
+    host: 127.0.0.1
+    port: 1433
+    database-name: BILLING
+    username: sa
+    password: ""
+    # Extra JDBC properties appended to the source connection string.
+    # encrypt=false avoids TLS handshake failures against old servers without certs.
+    jdbc-extra: "encrypt=false;trustServerCertificate=true;loginTimeout=10"
+    # Optional full JDBC URL override (e.g. jTDS for SQL Server 2005:
+    # jdbc:jtds:sqlserver://127.0.0.1:1433/BILLING). Leave empty to build the URL
+    # from host/port/database-name with the Microsoft driver.
+    jdbc-url-override: ""
+
+  sync:
+    page-size: 2000
+    rebuild-daily-stock: true

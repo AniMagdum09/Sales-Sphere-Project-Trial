@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SalesSphere — Retail Analytics</title>
+    <script>
+      // Apply the persisted theme before first paint (default: dark).
+      try {
+        var t = localStorage.getItem('salesphere.theme')
+        document.documentElement.setAttribute('data-theme', t === 'light' ? 'light' : 'dark')
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'dark')
+      }
+    </script>
+    <script type="module" crossorigin src="./assets/index-CF9mTJvz.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-CuqO36CP.css">
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>
+
